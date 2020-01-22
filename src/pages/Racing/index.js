@@ -1,6 +1,6 @@
 import React , {useState, useEffect} from 'react';
 
-import {Pista, Carro, Joystick, Mensagem, Container} from './styled';
+import {Pista, Carro, Mensagem, Container} from './styled';
 
 export default function Racing(){
     const [position, setPosition] = useState(44);
@@ -14,23 +14,36 @@ export default function Racing(){
     },[])
   
 
+    useEffect(()=>{
+        window.addEventListener('keydown', (event)=>{
+            handlePosition(event);
+       
+        })
+    },[])
 
 
     function handlePosition(event){
-    
-        if(event.key === 'a') return setPosition(31);
-        if(event.key === 's') return setPosition(44);
-        if(event.key === 'd') return setPosition(57);
+        event.preventDefault();
 
-        if(event.key === 'ArrowLeft') return setPosition(position-13);
-        if(event.key === 'ArrowRight') return setPosition(position+13);
-
-        if(event.key === 'Escape') {
-            setStarting(!starting) 
-            return setMessage('Pausado')
-        }
-               
-       
+         switch(event.key){
+            case 'a':
+                return setPosition(31)
+            case 's':
+                return setPosition(44)
+            case 'd':
+                return setPosition(57);
+            case 'ArrowLeft':
+                return setPosition(31) 
+            case 'ArrowRight':
+                return setPosition(57)   
+            case 'Escape': {
+                setMessage('Pausado')
+                return setStarting((starting)=>!starting)
+            }
+            default:
+               return ;       
+         }   
+             
     }
 
   
@@ -42,7 +55,6 @@ export default function Racing(){
             <Pista starting={starting} >
                 <Mensagem >{!starting && message }</Mensagem>
                 <Carro position={position} />  
-                <Joystick onKeyDown={handlePosition} autoFocus  />
             </Pista>
 
         </Container>

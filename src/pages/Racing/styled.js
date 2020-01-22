@@ -56,15 +56,3 @@ export const Carro = styled.img.attrs({
    
 `
 
-
-export const Joystick = styled.input`
-   
-    opacity:0;
-    width:100%;
-    height:calc(100% - 18rem);
-
-    @media(max-width:500px){
-      height: calc(100% - 10rem);
-    }
-    
-    `;
