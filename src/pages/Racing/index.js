@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useCallback} from 'react';
 
 import {Pista, Carro, Mensagem, Container} from './styled';
 
@@ -20,43 +20,39 @@ export default function Racing(){
     },[])
   
 
+    
+    const handlePosition = useCallback( (event)=> {
+            event.preventDefault();
+            
+             switch(event.key){
+                case 'a':
+                    return setPosition(31)
+                case 's':
+                    return setPosition(44)
+                case 'd':
+                    return setPosition(57);
+                case 'ArrowLeft':
+                    return setPosition(31) 
+                case 'ArrowRight':
+                    return setPosition(57)   
+                case 'Escape': {
+                    setMessage('Pausado')
+                    return setStarting((starting)=>!starting)
+                }
+                default:
+                    return;     
+             }  
+        } ,[])
+
+
     useEffect(()=>{
-        window.addEventListener('keydown', (event)=>{
-            handlePosition(event);              
-        })
+        window.addEventListener('keydown', handlePosition )
         return () => {
-            window.removeEventListener('keydown', (event)=>{
-                handlePosition(event);                     
-            })
+            window.removeEventListener('keydown',handlePosition )
           };
-    },[])
+    },[handlePosition])
 
 
-    function handlePosition(event){
-        event.preventDefault();
-
-         switch(event.key){
-            case 'a':
-                return setPosition(31)
-            case 's':
-                return setPosition(44)
-            case 'd':
-                return setPosition(57);
-            case 'ArrowLeft':
-                return setPosition(31) 
-            case 'ArrowRight':
-                return setPosition(57)   
-            case 'Escape': {
-                setMessage('Pausado')
-                return setStarting((starting)=>!starting)
-            }
-            default:
-               return ;       
-         }   
-             
-    }
-
-  
     
 
     return(
