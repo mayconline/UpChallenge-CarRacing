@@ -1,16 +1,15 @@
 import React , {useState, useEffect} from 'react';
 
-import {Pista, Carro, Joystick} from './styled';
+import {Pista, Carro, Joystick, Mensagem, Container} from './styled';
 
 export default function Racing(){
-    const [position, setPosition] = useState(150);
+    const [position, setPosition] = useState(44);
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('3, 2 , 1 ...');
    
     useEffect(()=>{
         setTimeout(()=>{
-            setStarting(true);
-            setMessage('');
+            setStarting(true);         
         },3000)
     },[])
   
@@ -19,24 +18,36 @@ export default function Racing(){
 
     function handlePosition(event){
     
-        if(event.key === 'a') return setPosition(0);
-        if(event.key === 's') return setPosition(150);
-        if(event.key === 'd') return setPosition(300);
+        if(event.key === 'a') return setPosition(31);
+        if(event.key === 's') return setPosition(44);
+        if(event.key === 'd') return setPosition(57);
 
-        if(event.key === 'ArrowLeft') return setPosition(0);
-        if(event.key === 'ArrowRight') return setPosition(300);
+        if(event.key === 'ArrowLeft') return setPosition(position-13);
+        if(event.key === 'ArrowRight') return setPosition(position+13);
+
+        if(event.key === 'Escape') {
+            setStarting(!starting) 
+            return setMessage('Pausado')
+        }
+               
+       
     }
 
   
     
 
     return(
-       <Pista starting={starting} >
-           <h1>{message}</h1>
-           <Carro position={position} />
-            <Joystick onKeyDown={handlePosition} autoFocus  />
-          
-           
-       </Pista>
+        <>
+        <Container>
+            <Pista starting={starting} >
+                <Mensagem >{!starting && message }</Mensagem>
+                <Carro position={position} />  
+                <Joystick onKeyDown={handlePosition} autoFocus  />
+            </Pista>
+
+        </Container>
+      
+      
+       </>
     )
 }

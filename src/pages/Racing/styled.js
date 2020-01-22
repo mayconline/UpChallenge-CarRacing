@@ -5,38 +5,66 @@ import cenario_pausado from '../../assets/imgs/CENARIO_anima.jpg';
 
 import carro from '../../assets/imgs/CARRO.png';
 
+export const Container = styled.div`
+    display:flex;
+    flex:1;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,.7);
+`;
+
+
 export const Pista = styled.div`
-    width: 500px;
-    height: 600px;
+   
+    width:100%;
+    max-width: 600px;
+    
+    margin: 2rem auto;
+   
     background-image: url(${props => props.starting ? cenario: cenario_pausado});
     background-repeat: no-repeat;
     background-size: 100%;
 
-        h1{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-size:1.5rem;
-        }
+    @media(max-width:500px){
+       margin:10rem auto;
+    }
+    
     
 `
+
+export const Mensagem = styled.strong`
+    text-align: center;
+    display: block;
+    font-size:2rem;     
+    padding:100px;
+    color:#000;
+    
+  
+      
+`;
 
 export const Carro = styled.img.attrs({
     src: carro
 })`
-    width: 180px;
-    position:relative;
-    top:280px;
-    left: ${props => `${props.position}px`};
+ 
+    position:absolute;  
+    height:180px;
+    top:400px; 
+    left: ${props => `${props.position}%`};
     
+    
+   
 `
+
 
 export const Joystick = styled.input`
    
     opacity:0;
-    width: 550px;
-    height: 550px;
-    position:absolute;
-    top:0;
-    left:0
+    width:100%;
+    height:calc(100% - 18rem);
+
+    @media(max-width:500px){
+      height: calc(100% - 10rem);
+    }
+    
     `;
