@@ -1,9 +1,9 @@
 import React , {useState, useEffect, useCallback} from 'react';
 
-import {Pista, Carro, Mensagem, Container} from './styled';
+import {Pista, Carro, Mensagem, Container, Nickname} from './styled';
 
 export default function Racing(){
-    const [position, setPosition] = useState(44);
+    const [position, setPosition] = useState(300);
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('3, 2 , 1 ...');
     const [nickname, setNickname] = useState('');
@@ -26,15 +26,15 @@ export default function Racing(){
             
              switch(event.key){
                 case 'a':
-                    return setPosition(31)
+                    return setPosition(50)
                 case 's':
-                    return setPosition(44)
+                    return setPosition(300)
                 case 'd':
-                    return setPosition(57);
+                    return setPosition(500);
                 case 'ArrowLeft':
-                    return setPosition(31) 
+                    return setPosition(50) 
                 case 'ArrowRight':
-                    return setPosition(57)   
+                    return setPosition(500)   
                 case 'Escape': {
                     setMessage('Pausado')
                     return setStarting((starting)=>!starting)
@@ -59,12 +59,15 @@ export default function Racing(){
         <>
            
         <Container>
-            {nickname}
+           
             <Pista starting={starting} >
+            <Nickname>{nickname && nickname}</Nickname>
                 <Mensagem >{!starting && message }</Mensagem>
-                <Carro position={position} />  
-            </Pista>
 
+            <Carro position={position} />
+            </Pista>
+           
+           
         </Container>
       
       
