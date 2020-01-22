@@ -6,6 +6,12 @@ export default function Racing(){
     const [position, setPosition] = useState(44);
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('3, 2 , 1 ...');
+    const [nickname, setNickname] = useState('');
+  
+
+    useEffect(()=>{
+       setNickname(localStorage.getItem('@nickname')) 
+    },[])
    
     useEffect(()=>{
         setTimeout(()=>{
@@ -16,9 +22,13 @@ export default function Racing(){
 
     useEffect(()=>{
         window.addEventListener('keydown', (event)=>{
-            handlePosition(event);
-       
+            handlePosition(event);              
         })
+        return () => {
+            window.removeEventListener('keydown', (event)=>{
+                handlePosition(event);                     
+            })
+          };
     },[])
 
 
@@ -51,7 +61,9 @@ export default function Racing(){
 
     return(
         <>
+           
         <Container>
+            {nickname}
             <Pista starting={starting} >
                 <Mensagem >{!starting && message }</Mensagem>
                 <Carro position={position} />  

@@ -1,13 +1,18 @@
 import React from 'react';
 import GlobalStyled from './globalStyled';
+import {BrowserRouter} from 'react-router-dom';
 
-import Racing from './pages/Racing';
+import Routes from './routes';
 
 function App() {
   return (
     <>
-    <GlobalStyled/>
-    <Racing/>
+    <BrowserRouter>
+      <GlobalStyled/>
+      <Routes/>
+    </BrowserRouter>
+   
+   
     </>
   );
 }
