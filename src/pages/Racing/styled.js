@@ -4,6 +4,7 @@ import cenario from '../../assets/imgs/CENARIO_anima.gif'
 import cenario_pausado from '../../assets/imgs/CENARIO_anima.jpg';
 
 import carro from '../../assets/imgs/CARRO.png';
+import rocha from '../../assets/imgs/rock.png';
 
 export const Container = styled.div`
  
@@ -54,6 +55,17 @@ export const Carro = styled.img.attrs({
     height:180px;
     top:450px;
     left: ${props => `${props.position}px`};
+    position: absolute;
+   
+`
+export const Rocha = styled.img.attrs({
+    src: rocha
+})`
+   
+    height:150px;
+    width:220px;
+    top:380px;
+    left: ${props => `${props.rockPosition}px`};
     position: absolute;
    
 `

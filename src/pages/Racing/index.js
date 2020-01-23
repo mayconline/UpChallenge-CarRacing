@@ -1,14 +1,15 @@
 import React , {useState, useEffect, useCallback} from 'react';
 
-import {Pista, Carro, Mensagem, Container, Nickname} from './styled';
+import {Pista, Carro, Mensagem, Container, Nickname, Rocha} from './styled';
 
 
 export default function Racing(){
-    const [position, setPosition] = useState(300);
+    const [carPosition, setCarPosition] = useState(300);
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('');
     const [nickname, setNickname] = useState('');
-   
+    const [rockPosition, setRockPosition] = useState(0);
+    const [collision, setCollision] = useState(false);
     
 
     useEffect(()=>{
@@ -55,15 +56,15 @@ export default function Racing(){
             
              switch(event.key){
                 case 'a':
-                    return setPosition(50)
+                    return setCarPosition(50)
                 case 's':
-                    return setPosition(300)
+                    return setCarPosition(300)
                 case 'd':
-                    return setPosition(500);
+                    return setCarPosition(500);
                 case 'ArrowLeft':
-                    return setPosition(50) 
+                    return setCarPosition(50) 
                 case 'ArrowRight':
-                    return setPosition(500)   
+                    return setCarPosition(500)   
                 case 'Escape': {
                     setMessage('Pausado')
                     return setStarting((starting)=>!starting)
@@ -82,17 +83,54 @@ export default function Racing(){
     },[handlePosition])
 
    
+    
+    const generateValueRadom = useCallback(()=>{
+        if (starting) 
+              return Math.floor(Math.random()*(450-100+1))+100;                 
+      },[starting])
+      
+   
+    useEffect(()=>{
+        const intervalo = setInterval(()=>{
+            setRockPosition(generateValueRadom())
+        }, 2000)
 
+     return()=>{
+            clearInterval(intervalo)
+        }
+    },[generateValueRadom])
+
+
+    const checkCollision = useCallback((rockPosition, carPosition)=>{
+
+                    if(rockPosition === carPosition) {
+                        setCollision(true)
+                    }else
+                        setCollision(false);
+           
+           
+           
+                console.log({carPosition, rockPosition, collision})
+    
+    },[collision])
+
+    useEffect(()=>{
+        checkCollision(rockPosition, carPosition)
+    },[checkCollision, carPosition, rockPosition])
+
+    
 
     return(
         <>
+        
         <Container>
         
             <Pista starting={starting} >
             <Nickname>{nickname && nickname}</Nickname>
                 <Mensagem >{!starting && message }</Mensagem>
 
-            <Carro position={position} />
+            <Rocha rockPosition={rockPosition}/>
+            <Carro position={carPosition} />
             </Pista>
            
            
