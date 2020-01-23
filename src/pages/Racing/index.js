@@ -93,7 +93,7 @@ export default function Racing(){
     useEffect(()=>{
         const intervalo = setInterval(()=>{
             setRockPosition(generateValueRadom())
-        }, 2000)
+        }, 3000)
 
      return()=>{
             clearInterval(intervalo)
@@ -103,10 +103,14 @@ export default function Racing(){
 
     const checkCollision = useCallback((rockPosition, carPosition)=>{
 
-                    if(rockPosition === carPosition) {
+                    if(carPosition===300 && rockPosition<=370 && rockPosition>=230) {
                         setCollision(true)
-                    }else
-                        setCollision(false);
+                    }else if (carPosition===50 && rockPosition<=200 && rockPosition>=50){
+                        setCollision(true)
+                    }else if (carPosition===500 && rockPosition<=500 && rockPosition>=350){
+                        setCollision(true)
+                    }
+                       else setCollision(false);
            
            
            
