@@ -125,9 +125,9 @@ export default function Racing(){
                 }
                     else setCollision(false);
                  
-                console.log({carPosition, rockPosition, collision})
+               
     
-    },[collision])
+    },[])
 
     useEffect(()=>{    
         
@@ -135,17 +135,34 @@ export default function Racing(){
       
     },[checkCollision, carPosition, rockPosition])
 
+
+    function setScoreLocalStorage(nicknameValue, scoreValue){
+        let _id = new Date()
+        
+        let objScore = {
+            _id,
+            nicknameValue,
+            scoreValue
+        }    
+          const parseObjScore = JSON.stringify(objScore)
+
+            localStorage.setItem('@score',parseObjScore)
+      
+    }
     
-    const checkGameOver = useCallback((isCollision, isStarting)=>{
+    const checkGameOver = useCallback((isCollision, isStarting, nicknameValue, scoreValue)=>{
         if (isCollision && isStarting){
             setStarting(false)
             setMessage(`Game Over`)
+
+            setScoreLocalStorage(nicknameValue, scoreValue)
+
         } else return ;
       
     },[])
 
     useEffect(()=>{
-        checkGameOver(collision, starting)
+        checkGameOver(collision, starting, nickname, score)
     },[checkGameOver,collision, starting])
 
 
@@ -178,9 +195,8 @@ export default function Racing(){
 
            {!starting && (
                <Menu>
-                    <Link to={'/'}>Continue</Link>
                     <Link to={'/'}>Restart</Link>
-                    <Link to={'/'}>Score Record</Link>
+                    <Link to={'/score-boarding'}>Score Record</Link>
                </Menu>
                
             )}
