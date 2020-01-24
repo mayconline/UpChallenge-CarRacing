@@ -109,6 +109,7 @@ export const Carro = styled.img.attrs({
     top:450px;
     left: ${props => `${props.position}px`};
     position: absolute;
+    transition:left 1s;
    
 `
 export const Rocha = styled.img.attrs({
@@ -120,5 +121,6 @@ export const Rocha = styled.img.attrs({
     top:380px;
     left: ${props => `${props.rockPosition}px`};
     position: absolute;
+    transition:left 1s;
    
 `
