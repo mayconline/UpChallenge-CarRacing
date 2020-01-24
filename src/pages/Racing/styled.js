@@ -29,7 +29,26 @@ export const Pista = styled.div`
     
 `
 
+export const Header = styled.header`
+    
+  display:flex;
+  justify-content:space-between;
+
+      
+`;
+
+
 export const Nickname = styled.strong`
+    text-align: left;
+    display: block;
+    padding:1rem;
+    font-size:1.3rem;     
+    color:#000;
+    text-transform:capitalize;
+      
+`;
+
+export const Score = styled.strong`
     text-align: left;
     display: block;
     padding:1rem;
@@ -43,10 +62,44 @@ export const Mensagem = styled.strong`
     text-align: center;
     display: block;
     font-size:2rem;     
-    padding:5rem;
+    padding:3rem;
     color:#000; 
       
 `;
+
+
+
+export const Menu = styled.aside`
+    
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    
+        a{
+            text-decoration:none;
+            font-size:2rem;
+
+            width:50%;
+            border: 0;
+            margin-top: 0.5rem;
+            background: #7d40e7;
+            border-radius: 2px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color:#fff;
+            cursor: pointer;
+            transition: background 0.5s;
+
+                :hover{
+                    background: #6931ca;
+                }
+        }
+      
+`;
+
 
 export const Carro = styled.img.attrs({
     src: carro
