@@ -58,6 +58,16 @@ export const Score = styled.strong`
       
 `;
 
+export const Laps = styled.strong`
+    text-align: left;
+    display: block;
+    padding:1rem;
+    font-size:1.3rem;     
+    color:#000;
+  
+      
+`;
+
 export const Mensagem = styled.strong`
     text-align: center;
     display: block;

@@ -1,6 +1,6 @@
 import React , {useState, useEffect, useCallback} from 'react';
 
-import {Pista, Carro, Mensagem, Menu, Container, Header, Nickname, Score, Rocha} from './styled';
+import {Pista, Carro, Mensagem, Menu, Container, Header, Nickname, Score, Laps, Rocha} from './styled';
 
 import {Link} from 'react-router-dom';
 
@@ -12,6 +12,8 @@ export default function Racing(){
     const [rockPosition, setRockPosition] = useState(0);
     const [collision, setCollision] = useState(false);
     const [score, setScore] = useState(0);
+    const [laps, setLaps] = useState(0);
+    const [winner, setWinner] = useState(false);
 
     useEffect(()=>{
        setNickname(localStorage.getItem('@nickname')) 
@@ -40,19 +42,37 @@ export default function Racing(){
         },3300)
     },[])
 
-
-
-
-  
-    
+ 
         
-      useEffect(()=>{
-        setTimeout(()=>{
-            setMessage('Congrulation Wins')
-            setStarting(false);         
-             },60000)
-    
+
+      const verifyNumberLaps = useCallback((numberLaps, isStarting)=>{
+            if(numberLaps<4 && isStarting){
+                setLaps((laps)=>laps+1)
+               
+            }
+            else 
+                if(numberLaps === 4 ){
+                    setWinner(true)
+                    setMessage('Congrulation Wins')
+                    setStarting(false)
+                    
+                    
+            } 
+                
+            
+                
       },[])
+
+
+      useEffect(()=>{
+        const intervalLaps = setInterval(()=>{
+            verifyNumberLaps(laps, starting)
+        }, 2000)
+
+             return()=>{
+                 clearInterval(intervalLaps)
+                }
+    },[laps, verifyNumberLaps, starting])
 
       
   
@@ -104,7 +124,7 @@ export default function Racing(){
     useEffect(()=>{
         const intervalo = setInterval(()=>{
             setRockPosition(generatePositionRadomObstacle())
-        }, 3000)
+        }, 5000)
 
      return()=>{
             clearInterval(intervalo)
@@ -150,20 +170,28 @@ export default function Racing(){
       
     }
     
-    const checkGameOver = useCallback((isCollision, isStarting, nicknameValue, scoreValue)=>{
+    const checkGameOverOrWins = useCallback((isCollision, isStarting, nicknameValue, scoreValue, isWinner)=>{
         if (isCollision && isStarting){
             setStarting(false)
             setMessage(`Game Over`)
 
             setScoreLocalStorage(nicknameValue, scoreValue)
 
+        } else if (!isCollision && isStarting && isWinner ){
+
+            setScoreLocalStorage(nicknameValue, scoreValue)
+            
+            console.log({entrei:true, isWinner})
+
         } else return ;
       
+       
+       
     },[])
 
     useEffect(()=>{
-        checkGameOver(collision, starting, nickname, score)
-    },[checkGameOver,collision, starting])
+        checkGameOverOrWins(collision, starting, nickname, score, winner)
+    },[checkGameOverOrWins,collision, starting, nickname, score, winner])
 
 
     const incrementScore = useCallback((isCollision, isStarting)=>{
@@ -187,6 +215,7 @@ export default function Racing(){
         <Pista starting={starting} >
             <Header>
                 <Nickname>{nickname && nickname}</Nickname>
+                <Laps>  Laps: {`${laps}/4`} </Laps>
                 <Score> Score: {score}</Score>
             </Header>
             
