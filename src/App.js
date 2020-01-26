@@ -12,7 +12,7 @@ function App() {
     <>
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>
-        <GlobalStyled/>
+       <GlobalStyled/>
         <Routes/>
       </BrowserRouter>
     </ApolloProvider>

@@ -4,6 +4,8 @@
 
 2. URL do End Point de Consulta do servidor Backend para colocar no arquivo apollo.js => [https://racecargaming.herokuapp.com/graphql](https://racecargaming.herokuapp.com/graphql)
 
+3. URL do Jogo Online => [https://racecargaming.netlify.com/](https://racecargaming.netlify.com/)
+
 
 ## Instalação e execução
 
