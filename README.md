@@ -7,7 +7,15 @@
 4. Rode `npm run dev` para iniciar o servidor.
 5. Faça um clone desse repositório =>[FrontEnd](https://github.com/mayconline/UpChallenge-CarRacing);
 6. Entre na pasta do projeto e instale as dependências `cd UpChallenge-CarRacing && npm install`;
-7. Rode `npm start` para iniciar o frontend.
+7. Rode `npm start` para iniciar o frontend e acesse no [http://localhost:3000](http://localhost:3000).
+
+## Rodar o FrontEnd em Modo Produção
+
+1. Faça um clone desse repositório =>[FrontEnd](https://github.com/mayconline/UpChallenge-CarRacing);
+2. Entre na pasta do projeto e instale as dependências `cd UpChallenge-CarRacing && npm install`;
+3. Rode `npm run build` para gerar a build de produção
+4. Rode `npm install -g serve` para instalar o servidor do nodejs
+5. Rode `serve -s build` e acesso no [http://localhost:5000](http://localhost:5000)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
