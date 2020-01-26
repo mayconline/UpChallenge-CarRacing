@@ -1,10 +1,26 @@
 import React , {useState, useEffect, useCallback} from 'react';
+import {useMutation} from '@apollo/react-hooks'
+import {gql} from 'apollo-boost';
 
 import {Pista, Carro, Mensagem, Menu, Container, Header, Nickname, Score, Laps, Rocha} from './styled';
 
 import {Link} from 'react-router-dom';
 
+const UPDATE_SCORE_USER = gql`
+
+    mutation updateScoreUserByName($name:String!, $score:Int!){
+        updateScoreUserByName(name:$name, score:$score){
+            name
+            score
+        }
+    }
+
+`
+
 export default function Racing(){
+
+    const [updateScoreUserByName] = useMutation(UPDATE_SCORE_USER)
+
     const [carPosition, setCarPosition] = useState(300);
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('');
@@ -157,16 +173,13 @@ export default function Racing(){
 
 
     function setScoreLocalStorage(nicknameValue, scoreValue){
-        let _id = new Date()
-        
-        let objScore = {
-            _id,
-            nicknameValue,
-            scoreValue
-        }    
-          const parseObjScore = JSON.stringify(objScore)
-
-            localStorage.setItem('@score',parseObjScore)
+      
+          updateScoreUserByName({
+              variables:{
+                  name:nicknameValue,
+                  score:scoreValue
+              }
+          })
       
     }
     
@@ -181,7 +194,7 @@ export default function Racing(){
 
             setScoreLocalStorage(nicknameValue, scoreValue)
             
-            console.log({entrei:true, isWinner})
+            
 
         } else return ;
       

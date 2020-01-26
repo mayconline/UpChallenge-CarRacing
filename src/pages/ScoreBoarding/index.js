@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
@@ -19,9 +19,13 @@ const USER_QUERY = gql`
 export default function ScoreBoarding({history}){
    
   
-    const {loading, error, data} = useQuery(USER_QUERY)
+    const {loading, error, data, refetch} = useQuery(USER_QUERY)
 
- 
+    useEffect(()=>{
+        refetch();
+    },[refetch])
+
+
     return(
         <Container>
             <StoryContainer>

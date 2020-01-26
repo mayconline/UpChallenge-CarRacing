@@ -1,16 +1,39 @@
 import React , {useState} from 'react';
+import {useMutation} from '@apollo/react-hooks'
+import {gql} from 'apollo-boost';
+
 import {Container, FormContainer, Form, InputBlock, FormButton} from './styled';
+
+const ENTER_USER = gql`
+
+    mutation createUser($name:String!){
+        createUser(name:$name){
+            name
+        }
+    }
+
+`
 
 export default function Login({history}){
         
     const [nickname, setNickname] = useState('')
 
-    function handleSubmit(event){
+    const [createUser] = useMutation(ENTER_USER)
+
+   
+
+  async function handleSubmit(event){
         event.preventDefault();
 
-        localStorage.setItem('@nickname',nickname);
+        createUser({
+            variables:{
+                name:nickname
+            }   
+        })
+
+       localStorage.setItem('@nickname',nickname);
         
-        history.push(`/racing`);
+       history.push(`/racing`);
        
     }
 
