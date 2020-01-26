@@ -1,3 +1,9 @@
+## Modo de Jogo Online
+
+1. URL do backend playgrond para visualizar a documentação e realizar testes =>[Playground](https://racecargaming.herokuapp.com/playground) 
+
+2. URL do End Point de Consulta do servidor Backend para colocar no arquivo apollo.js => [https://racecargaming.herokuapp.com/graphql](https://racecargaming.herokuapp.com/graphql)
+
 
 ## Instalação e execução
 

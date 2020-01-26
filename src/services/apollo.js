@@ -1,7 +1,11 @@
 import {ApolloClient, HttpLink, InMemoryCache} from 'apollo-boost'
 
 const httpLink = new HttpLink({
-    uri: 'http://localhost:3030/graphql'
+            /* Exemplo de Uri Local  */
+   // uri: 'http://localhost:3030/graphql'
+
+            /* Uri de produção online */
+   uri: 'https://racecargaming.herokuapp.com/graphql'
 })
 
 const client = new ApolloClient({
