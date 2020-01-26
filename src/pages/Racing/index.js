@@ -25,7 +25,8 @@ export default function Racing(){
     const [starting, setStarting] = useState(false);
     const [message, setMessage] = useState('');
     const [nickname, setNickname] = useState('');
-    const [rockPosition, setRockPosition] = useState(0);
+    const [rockPosition, setRockPosition] = useState(50);
+    const [rockOpacity, setRockOpacity] = useState(0);
     const [collision, setCollision] = useState(false);
     const [score, setScore] = useState(0);
     const [laps, setLaps] = useState(0);
@@ -68,11 +69,9 @@ export default function Racing(){
             }
             else 
                 if(numberLaps === 4 ){
-                    setWinner(true)
                     setMessage('Congrulation Wins')
                     setStarting(false)
-                    
-                    
+                    setWinner(true)         
             } 
                 
             
@@ -83,7 +82,7 @@ export default function Racing(){
       useEffect(()=>{
         const intervalLaps = setInterval(()=>{
             verifyNumberLaps(laps, starting)
-        }, 2000)
+        }, 10000)
 
              return()=>{
                  clearInterval(intervalLaps)
@@ -129,50 +128,55 @@ export default function Racing(){
 
    
     
-    const generatePositionRadomObstacle = useCallback(()=>{
+    const generatePositionRandomObstacle = useCallback(()=>{
         if (starting) 
-              return Math.floor(Math.random()*(450-100+1))+100;    
+              return Math.floor(Math.random()*(500-50)+50);    
                 else 
                     return rockPosition;             
       },[starting, rockPosition])
+
+    const generateOpacityRandomObstacle = useCallback(()=>{
+        if (starting) 
+              return Math.floor(Math.random()*(1-0+1))+0; 
+                else 
+                    return rockOpacity; 
+    },[starting, rockOpacity])
       
    
     useEffect(()=>{
         const intervalo = setInterval(()=>{
-            setRockPosition(generatePositionRadomObstacle())
-        }, 5000)
+            setRockPosition(generatePositionRandomObstacle())
+            setRockOpacity(generateOpacityRandomObstacle())
+           
+        }, 2000)
 
      return()=>{
             clearInterval(intervalo)
         }
-    },[generatePositionRadomObstacle])
+    },[generatePositionRandomObstacle, generateOpacityRandomObstacle])
 
 
-    const checkCollision = useCallback((rockPosition, carPosition)=>{
+    const checkCollision = useCallback((rockPosition, carPosition, isRockOpacity)=>{
               
-        if(carPosition===300 && rockPosition<=370 && rockPosition>=230) {
+        if(carPosition===300 && rockPosition<310 && rockPosition>=290 && isRockOpacity===1) {
             setCollision(true)
         }else 
-            if (carPosition===50 && rockPosition<=200 && rockPosition>=50){
+            if (carPosition===50 && rockPosition<80 && rockPosition>=50 && isRockOpacity===1){
                 setCollision(true)
             }else 
-                if (carPosition===500 && rockPosition<=500 && rockPosition>=350){
+                if (carPosition===500 && rockPosition<=500 && rockPosition>=480 && isRockOpacity===1){
                 setCollision(true)
                 }
-                    else setCollision(false);
-                 
-               
-    
     },[])
 
     useEffect(()=>{    
         
-        checkCollision(rockPosition, carPosition)
+        checkCollision(rockPosition, carPosition, rockOpacity)
       
-    },[checkCollision, carPosition, rockPosition])
+    },[checkCollision, carPosition, rockPosition, rockOpacity])
 
 
-    function setScoreLocalStorage(nicknameValue, scoreValue){
+    function setScoreMongoDB(nicknameValue, scoreValue){
       
           updateScoreUserByName({
               variables:{
@@ -188,18 +192,16 @@ export default function Racing(){
             setStarting(false)
             setMessage(`Game Over`)
 
-            setScoreLocalStorage(nicknameValue, scoreValue)
+            setScoreMongoDB(nicknameValue, scoreValue)
 
-        } else if (!isCollision && isStarting && isWinner ){
-
-            setScoreLocalStorage(nicknameValue, scoreValue)
+        } else if (!isCollision && isWinner ){
+           
+            setScoreMongoDB(nicknameValue, scoreValue)
             
             
 
         } else return ;
-      
-       
-       
+           
     },[])
 
     useEffect(()=>{
@@ -243,10 +245,7 @@ export default function Racing(){
                
             )}
          
-           
-            
-
-            <Rocha rockPosition={rockPosition}/>
+            <Rocha rockPosition={rockPosition} rockOpacity={rockOpacity}/>
             <Carro position={carPosition} />
         </Pista>
            

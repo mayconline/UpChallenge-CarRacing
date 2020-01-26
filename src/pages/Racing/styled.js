@@ -130,7 +130,9 @@ export const Rocha = styled.img.attrs({
     width:220px;
     top:380px;
     left: ${props => `${props.rockPosition}px`};
+    opacity:${props => `${props.rockOpacity}`};
     position: absolute;
-    transition:left 1s;
+    transition:left 1s, opacity 1s;
+    
    
 `
