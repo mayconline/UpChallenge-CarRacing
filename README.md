@@ -7,7 +7,9 @@
 4. Rode `npm run dev` para iniciar o servidor.
 5. Faça um clone desse repositório =>[FrontEnd](https://github.com/mayconline/UpChallenge-CarRacing);
 6. Entre na pasta do projeto e instale as dependências `cd UpChallenge-CarRacing && npm install`;
-7. Rode `npm start` para iniciar o frontend e acesse no [http://localhost:3000](http://localhost:3000).
+7. Abra o projeto com seu editor de código, e entre na pasta `/src/services` 
+8. Edite o arquivo `apollo.js` e altere a linha `uri` com a Url do seu servidor local e porta.
+9. Rode `npm start` para iniciar o frontend e acesse no [http://localhost:3000](http://localhost:3000).
 
 ## Rodar o FrontEnd em Modo Produção
 
@@ -17,31 +19,25 @@
 4. Rode `npm install -g serve` para instalar o servidor do nodejs
 5. Rode `serve -s build` e acesso no [http://localhost:5000](http://localhost:5000)
 
+## Sobre o Jogo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Jogo de corrida feito em React JS, onde o usuário entre com um nickname, e inicia o jogo,
+durante o percurso da corrida, podem aparecer em tempos aleatórios pedras no caminho, onde
+o usuario deverá desviar para continuar a corrida.<br />
 
-## Available Scripts
+**O Jogo termina de 2 formas:**<br />
+1. Usuario consegue chegar até o final das 4 voltas, e é Campeão do circuito.
+2. Usuario bate na pedra, e da Game Over.
 
-In the project directory, you can run:
+**O Usuario consegue pontuação de 2 formas:**<br />
+1. Desviando das Pedras.
+2. Movimentando o Carro.
 
-### `yarn start` or `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-
-### `yarn build` or `npm build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Ao Terminar a Corrida, ou dar Game Over, o Cliente faz uma requisição ao servidor da API via
+GraphQL, e verifica se o score que o usuário obteve é maior que o anterior obtido pelo mesmo,
+caso seja maior, ele atualiza o valor com o score maior, caso seja menor, ele mantém o score anterior.
 
 
-
-
-**Note: ngrito**
 
 
 
