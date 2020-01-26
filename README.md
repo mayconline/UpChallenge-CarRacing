@@ -33,6 +33,17 @@ Jogo de corrida feito em React JS, onde o usuário entre com um nickname, e inic
 durante o percurso da corrida, podem aparecer em tempos aleatórios pedras no caminho, onde
 o usuario deverá desviar para continuar a corrida.<br />
 
+**Teclas de Controle do Jogo**
+
+- Tecla A => Move o carro para a Esquerda
+- Tecla S => Move o carro para o Meio
+- Tecla D => Move o carro para a Direita
+
+- Seta Esquerda do Teclado => Move o carro para a Esquerda
+- Seta Direita do Teclado => Move o carro para a Direita
+
+- Tecla ESC => Pausa e Despausa o Jogo
+
 **O Jogo termina de 2 formas:**<br />
 1. Usuario consegue chegar até o final das 4 voltas, e é Campeão do circuito.
 2. Usuario bate na pedra, e da Game Over.
