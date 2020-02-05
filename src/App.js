@@ -1,22 +1,19 @@
+import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import GlobalStyled from './globalStyled';
-import {BrowserRouter} from 'react-router-dom';
-import {ApolloProvider} from '@apollo/react-hooks';
-
-import apolloClient from './services/apollo';
-
 import Routes from './routes';
+import apolloClient from './services/apollo';
 
 function App() {
   return (
     <>
-    <ApolloProvider client={apolloClient}>
-      <BrowserRouter>
-       <GlobalStyled/>
-        <Routes/>
-      </BrowserRouter>
-    </ApolloProvider>
-   
+      <ApolloProvider client={apolloClient}>
+        <BrowserRouter>
+          <GlobalStyled />
+          <Routes />
+        </BrowserRouter>
+      </ApolloProvider>
     </>
   );
 }
