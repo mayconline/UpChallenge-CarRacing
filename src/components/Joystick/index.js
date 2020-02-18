@@ -1,31 +1,49 @@
 import React from 'react';
-import { MdArrowBack, MdArrowForward, MdArrowUpward } from 'react-icons/md';
-import { CenterButton, Container, LeftButton, RightButton } from './styled';
+import {
+  MdArrowBack,
+  MdArrowForward,
+  MdArrowUpward,
+  MdPause,
+} from 'react-icons/md';
+import { Button, Container, PauseButton } from './styled';
 
-export default function Joystick({ position }) {
+export default function Joystick({
+  setPosition,
+  starting,
+  setStarting,
+  setMessage,
+}) {
   return (
     <Container>
-      <LeftButton
+      <Button
         onClick={() => {
-          position(50);
+          setPosition(position => (starting ? 50 : position));
         }}
       >
         <MdArrowBack size={50} />
-      </LeftButton>
-      <CenterButton
+      </Button>
+      <Button
         onClick={() => {
-          position(300);
+          setPosition(position => (starting ? 300 : position));
         }}
       >
         <MdArrowUpward size={50} />
-      </CenterButton>
-      <RightButton
+      </Button>
+      <Button
         onClick={() => {
-          position(500);
+          setPosition(position => (starting ? 500 : position));
         }}
       >
         <MdArrowForward size={50} />
-      </RightButton>
+      </Button>
+      <PauseButton
+        onClick={() => {
+          setMessage('Paused');
+          setStarting(isStarting => !isStarting);
+        }}
+      >
+        <MdPause size={50} />
+      </PauseButton>
     </Container>
   );
 }

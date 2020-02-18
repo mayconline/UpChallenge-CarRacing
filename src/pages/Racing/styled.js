@@ -9,6 +9,9 @@ export const Container = styled.div`
   background: rgba(0, 0, 0, 0.7);
   top: 0;
   left: 0;
+  @media (max-width: 768px) {
+    background: transparent;
+  }
 `;
 
 export const Road = styled.div`
@@ -22,6 +25,7 @@ export const Road = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 17rem;
+    width: 780px;
   }
 `;
 

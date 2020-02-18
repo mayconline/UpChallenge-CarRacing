@@ -239,7 +239,12 @@ export default function Racing() {
           <Rock rockPosition={rockPosition} rockOpacity={rockOpacity} />
           <Car position={carPosition} />
         </Road>
-        <Joystick position={setCarPosition} />
+        <Joystick
+          setPosition={setCarPosition}
+          starting={starting}
+          setStarting={setStarting}
+          setMessage={setMessage}
+        />
       </Container>
     </>
   );
