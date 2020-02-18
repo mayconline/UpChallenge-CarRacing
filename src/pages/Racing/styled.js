@@ -19,6 +19,10 @@ export const Road = styled.div`
   width: 800px;
   height: 100vh;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    margin-top: 17rem;
+  }
 `;
 
 export const Header = styled.header`

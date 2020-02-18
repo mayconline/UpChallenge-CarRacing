@@ -13,10 +13,14 @@ export default createGlobalStyle`
         font-size:14px;      
         text-rendering:optimizeLegibility;
         -webkit-font-smoothing:antialiased;
-        background-image: linear-gradient(to right top, #d16ba5, #cd5dad, #c551b7, #b847c4, #a541d2, #a254de, #9e65e9, #9b74f3, #b298f9, #cabafd, #e4ddff, #ffffff);        
-    }
+        background: linear-gradient(to right top, #d16ba5, #cd5dad, #c551b7, #b847c4, #a541d2, #a254de, #9e65e9, #9b74f3, #b298f9, #cabafd, #e4ddff, #ffffff);        
+        background-size:cover;
+        background-repeat:no-repeat;          
+   
+   }
 
     html , body , #root {
         height:100%;
+      
     }
 `;

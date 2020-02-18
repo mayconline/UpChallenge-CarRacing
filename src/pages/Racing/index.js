@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Joystick from '../../components/Joystick';
 import {
   Car,
   Container,
@@ -238,6 +239,7 @@ export default function Racing() {
           <Rock rockPosition={rockPosition} rockOpacity={rockOpacity} />
           <Car position={carPosition} />
         </Road>
+        <Joystick position={setCarPosition} />
       </Container>
     </>
   );
