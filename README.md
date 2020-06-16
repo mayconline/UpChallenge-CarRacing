@@ -1,3 +1,10 @@
+
+ <a href='https://racecargaming.netlify.com/' rel='noopener noreferrer' target='_blank'>
+   <p align="center">
+     <img src="public/images/icons/icon-144x144.png" />
+   </p>
+ </a>
+
 ## Modo de Jogo Online
 
 1. URL do backend playgrond para visualizar a documentação e realizar testes =>[Playground](https://racecargaming.herokuapp.com/playground)
